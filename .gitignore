@@ -1,3 +1,10 @@
+bin
+credentials/*
+!credentials/.keep
+.DS_Store
+vendor
+.env
+
 # Binaries for programs and plugins
 *.exe
 *.dll
