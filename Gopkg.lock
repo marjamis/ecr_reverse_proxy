@@ -3,15 +3,15 @@
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
-  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/xml/xmlutil","service/ecr","service/ecr/ecriface","service/sts"]
-  revision = "e63027ac6e05f6d4ae9f97ce0294d7468ca652da"
-  version = "v1.10.33"
+  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/sdkio","internal/sdkrand","internal/shareddefaults","private/protocol","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/xml/xmlutil","service/cloudwatch","service/cloudwatch/cloudwatchiface","service/ecr","service/ecr/ecriface","service/sts"]
+  revision = "28d0127967e59b0c41cede1e8d548ed85374bbbc"
+  version = "v1.13.14"
 
 [[projects]]
   branch = "master"
   name = "github.com/awslabs/amazon-ecr-credential-helper"
   packages = ["ecr-login","ecr-login/api","ecr-login/cache","ecr-login/config"]
-  revision = "e63ef99f0995dda1bbbf10b2fdb4f55d458d6d52"
+  revision = "8549783ceff8405a4dcc02689409945565c0c7ea"
 
 [[projects]]
   name = "github.com/cihub/seelog"
@@ -22,20 +22,19 @@
 [[projects]]
   name = "github.com/docker/docker-credential-helpers"
   packages = ["credentials"]
-  revision = "2d19ebb7f482fb33cc63c9965ccda98b89821637"
-  version = "v0.5.2"
+  revision = "d68f9aeca33f5fd3f08eeae5e9d175edf4e731d1"
+  version = "v0.6.0"
 
 [[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
-  revision = "20b96f641a5ea98f2f8619ff4f3e061cff4833bd"
-  version = "v1.28.2"
+  revision = "6333e38ac20b8949a8dd68baa3650f4dee8f39f0"
+  version = "v1.33.0"
 
 [[projects]]
   name = "github.com/jmespath/go-jmespath"
   packages = ["."]
-  revision = "3433f3ea46d9f8019119e7dd41274e112a2359a9"
-  version = "0.2.2"
+  revision = "0b12d6b5"
 
 [[projects]]
   branch = "master"
@@ -43,9 +42,27 @@
   packages = ["."]
   revision = "b8bc1bf767474819792c23f32d8286a45736f1c6"
 
+[[projects]]
+  name = "github.com/sirupsen/logrus"
+  packages = ["."]
+  revision = "c155da19408a8799da419ed3eeb0cb5db0ad5dbc"
+  version = "v1.0.5"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/crypto"
+  packages = ["ssh/terminal"]
+  revision = "21652f85b0fdddb6c2b6b77a5beca5c5a908174a"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["unix","windows"]
+  revision = "89ac7f292d17a339edab4de8efcba5d8672ff661"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8fe3cf5929dea6d23831e400bf05fb6cba5dde14d91c4bb2ff880df803337277"
+  inputs-digest = "cb8ba6c0f0029ba62530e06e801e275c4f9c2959e278a8638b0213f20497c0b1"
   solver-name = "gps-cdcl"
   solver-version = 1
