@@ -15,9 +15,10 @@ import (
 
 	ecr "github.com/awslabs/amazon-ecr-credential-helper/ecr-login"
 
-	log "github.com/sirupsen/logrus"
 	defaultLog "log"
 	_ "net/http/pprof"
+
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -56,6 +57,9 @@ func main() {
 	defaultLog.SetOutput(logger.Writer())
 	defer w.Close()
 
+	log.WithFields(log.Fields{
+		"Function": "main",
+	}).Info("Attempting to listen on port ", os.Getenv("PORT"))
 	log.WithFields(log.Fields{
 		"Function": "main",
 	}).Fatal("The application has exited. Check you have the required ENV's.\n", http.ListenAndServeTLS(":"+os.Getenv("PORT"),

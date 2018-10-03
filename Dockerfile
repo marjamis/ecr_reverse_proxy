@@ -1,10 +1,10 @@
 FROM golang:1.9 AS build
 WORKDIR /go/src/ecr_reverse_proxy/
 RUN apt-get update && apt-get install unzip
-RUN cd /tmp && wget -L https://github.com/golang/dep/releases/download/v0.4.1/dep-linux-amd64 && unzip dep-linux-amd64
+RUN cd /tmp && wget -L https://github.com/golang/dep/releases/download/v0.4.1/dep-linux-amd64 && mv dep-linux-amd64 dep && chmod +x dep
 COPY Gopkg.* /go/src/ecr_reverse_proxy/
+RUN /tmp/dep ensure --vendor-only
 COPY *.go /go/src/ecr_reverse_proxy/
-RUN /tmp/dep ensure
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o ecr_reverse_proxy .
 
 FROM alpine:latest

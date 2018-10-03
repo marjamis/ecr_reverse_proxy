@@ -3,14 +3,50 @@
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
-  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/sdkio","internal/sdkrand","internal/shareddefaults","private/protocol","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/xml/xmlutil","service/cloudwatch","service/cloudwatch/cloudwatchiface","service/ecr","service/ecr/ecriface","service/sts"]
+  packages = [
+    "aws",
+    "aws/awserr",
+    "aws/awsutil",
+    "aws/client",
+    "aws/client/metadata",
+    "aws/corehandlers",
+    "aws/credentials",
+    "aws/credentials/ec2rolecreds",
+    "aws/credentials/endpointcreds",
+    "aws/credentials/stscreds",
+    "aws/defaults",
+    "aws/ec2metadata",
+    "aws/endpoints",
+    "aws/request",
+    "aws/session",
+    "aws/signer/v4",
+    "internal/sdkio",
+    "internal/sdkrand",
+    "internal/shareddefaults",
+    "private/protocol",
+    "private/protocol/json/jsonutil",
+    "private/protocol/jsonrpc",
+    "private/protocol/query",
+    "private/protocol/query/queryutil",
+    "private/protocol/rest",
+    "private/protocol/xml/xmlutil",
+    "service/cloudwatch",
+    "service/ecr",
+    "service/ecr/ecriface",
+    "service/sts"
+  ]
   revision = "28d0127967e59b0c41cede1e8d548ed85374bbbc"
   version = "v1.13.14"
 
 [[projects]]
   branch = "master"
   name = "github.com/awslabs/amazon-ecr-credential-helper"
-  packages = ["ecr-login","ecr-login/api","ecr-login/cache","ecr-login/config"]
+  packages = [
+    "ecr-login",
+    "ecr-login/api",
+    "ecr-login/cache",
+    "ecr-login/config"
+  ]
   revision = "8549783ceff8405a4dcc02689409945565c0c7ea"
 
 [[projects]]
@@ -57,12 +93,15 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
-  packages = ["unix","windows"]
+  packages = [
+    "unix",
+    "windows"
+  ]
   revision = "89ac7f292d17a339edab4de8efcba5d8672ff661"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "cb8ba6c0f0029ba62530e06e801e275c4f9c2959e278a8638b0213f20497c0b1"
+  inputs-digest = "0e4d3c6edd4b1c9331afaa03b71b222fe01d0df61e5078c31edafa6e79e13b9f"
   solver-name = "gps-cdcl"
   solver-version = 1
