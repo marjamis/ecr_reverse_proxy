@@ -29,6 +29,17 @@ A basic example to test locally will run on port 5000 and use  generated self-si
 make -e REGION=<CWMetricRegion> -e ECR_REGISTRY=<BackendECR> -e REGISTRY=<ProxyURL> playtest
 ```
 
+**Note:** As this will create a self-signed certificate docker by default won't allow this and will report the error:
+
+> Error response from daemon: Get https://domain:5000/v2/: x509: certificate signed by unknown authority
+
+to get around this you can temporarily add the certificate generated to a docker daemon configuration location to tell docker this specific self-signed certificate it OK to ignore the fact that it's an unknown CA. This is purely to simplify testing but running a command like:
+```bash
+mkdir -p /etc/docker/certs.d/<domain>:<port_if_not_443>/
+cp ./credentials/cert.pem /etc/docker/certs.d/<domain>:<port_if_not_443>/ca.crt
+```
+will do the trick. This is easier to do directly on Linux as with Docker for Mac you will need to make the modifications within the VM and not from the MacOS side.
+
 #### Testing with docker
 Once the application is run you can point your Docker commands to the proxy URL which will in turn use the configured ECR Registry to push/pull the specified image. I.e.:
 ```bash
@@ -39,9 +50,9 @@ docker pull <ProxyURL>/<Repository>:<Tag>
 ### Normal Usage
 The way to run this outside of testing would be to build the image with:
 ```bash
-make dockerBuild
+make -e REGION=<CWMetricRegion> -e ECR_REGISTRY=<BackendECR> -e REGISTRY=<ProxyURL> dockerBuild
 ```
-and once the image has been created it can be run via your normal orchestration system with the required environment variables, as listed above, to configure it's operation.
+and once the image has been created it can be run via your normal orchestration system with the required/available environment variables, as listed above, to configure it's operation.
 
 ## Profiling
 The package **net/http/pprof** is also in use and opens the profiling on:
