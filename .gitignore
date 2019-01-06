@@ -4,6 +4,7 @@ credentials/*
 .DS_Store
 vendor
 .env
+used-manifest.k8s.yml
 
 # Binaries for programs and plugins
 *.exe
