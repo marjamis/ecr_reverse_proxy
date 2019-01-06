@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecrreverseproxy
+data:
+  PORT: "{PORT}"
+  REGION: {REGION}
+  REGISTRY: {REGISTRY}
+  ECR_REGISTRY: {ECR_REGISTRY}
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: ecrreverseproxy
+  name: ecrreverseproxy
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecrreverseproxy
+  template:
+    metadata:
+      labels:
+        app: ecrreverseproxy
+    spec:
+      containers:
+        - image: marjamis/ecr_reverse_proxy:latest
+          name: ecrreverseproxy
+          ports:
+          - containerPort: {PORT}
+            protocol: TCP
+          envFrom:
+          - configMapRef:
+              name: ecrreverseproxy
+      volumes:
+        - name: certs
+          secret:
+            secretName: ecrreverseproxy
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ecrreverseproxy
+  name: ecrreverseproxy
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"
+  namespace: kube-system
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 443
+    targetPort: {PORT}
+    protocol: TCP
+  selector:
+    app: ecrreverseproxy
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ecrreverseproxy
+  namespace: kube-system
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: true
+    nginx.ingress.kubernetes.io/force-ssl-redirect: true
+spec:
+  rules:
+  - host: {HOST}
+    http:
+      paths:
+      - backend:
+          serviceName: ecrreverseproxy
+          servicePort: {PORT}
+        path: /
+  tls:
+    - hosts:
+      - {HOST}
+      secretName: ecrreverseproxy

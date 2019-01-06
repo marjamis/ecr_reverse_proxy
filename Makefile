@@ -36,3 +36,11 @@ build:
 
 run: checks
 	TLS_CERTIFICATE=$(TLS_CERTIFICATE) TLS_PRIVATE_KEY=$(TLS_PRIVATE_KEY) REGION=$(REGION) REGISTRY=$(REGISTRY) ECR_REGISTRY=$(ECR_REGISTRY) PORT=$(PORT) go run main.go
+
+# Replaces variables in the generic k8s manifest for internal testing
+k8s-manifestReplace:
+	cat manifest.k8s.yml | sed -f .env > used-manifest.k8s.yml
+
+# Generates and adds the TLS secrets for the Ingress Controller to use
+k8s-addSecrets: genSelfsigned
+	kubectl create secret tls ecrreverseproxy --cert ./credentials/cert.pem --key ./credentials/privkey.pem
